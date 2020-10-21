@@ -5,13 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class ListOfFolders {
+public class ListOfLists {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String nameOfFolder;
+    private String nameOfList;
 
     public Long getId() {
         return id;
@@ -22,10 +22,10 @@ public class ListOfFolders {
     }
 
     public String getNameOfDBFolder() {
-        return nameOfFolder;
+        return nameOfList;
     }
 
     public void setNameOfDBFolder(String nameOfFolder) {
-        this.nameOfFolder = nameOfFolder;
+        this.nameOfList = nameOfFolder;
     }
 }
