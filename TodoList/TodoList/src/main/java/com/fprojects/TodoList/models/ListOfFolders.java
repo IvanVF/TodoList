@@ -11,7 +11,7 @@ public class ListOfFolders {
     @GeneratedValue
     private Long id;
 
-    String name_of_db_folder;
+    String nameOfFolder;
 
     public Long getId() {
         return id;
@@ -22,10 +22,10 @@ public class ListOfFolders {
     }
 
     public String getNameOfDBFolder() {
-        return name_of_db_folder;
+        return nameOfFolder;
     }
 
-    public void setNameOfDBFolder(String nameOfDBFolder) {
-        this.name_of_db_folder = nameOfDBFolder;
+    public void setNameOfDBFolder(String nameOfFolder) {
+        this.nameOfFolder = nameOfFolder;
     }
 }
