@@ -36,12 +36,12 @@ public class ListOfListsController {
         return listOfListsRepository.findAll();
     }
 
-    @GetMapping("/getOne/{id}") //Получить один список по запросу http://localhost:8082/list/all
+    @GetMapping("/getOne/{id}") //Получить один список по номеру id http://localhost:8082/list/getOne/2
     public ListOfLists getOneList(@PathVariable("id") ListOfLists listOfLists) {
         return listOfLists;
     }
 
-    @DeleteMapping("/delete/{id}") //Удалить список по запросу http://localhost:8082/list/delete/2
+    @DeleteMapping("/delete/{id}") //Удалить список по номеру id http://localhost:8082/list/delete/2
     public void delete(@PathVariable("id") ListOfLists listOfLists) {
         listOfListsRepository.delete(listOfLists);
     }
