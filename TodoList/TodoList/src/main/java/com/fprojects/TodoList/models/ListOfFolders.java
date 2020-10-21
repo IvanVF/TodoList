@@ -11,7 +11,7 @@ public class ListOfFolders {
     @GeneratedValue
     private Long id;
 
-    String nameOfFolder;
+    private String nameOfFolder;
 
     public Long getId() {
         return id;
