@@ -10,23 +10,23 @@ public class ListOfLists {
 
     @Id
     @GeneratedValue
-    private UUID ListId;
+    private UUID listId;
 
     private String nameOfList;
 
     public UUID getListId() {
-        return ListId;
+        return listId;
     }
 
     public void setListId(UUID id) {
-        this.ListId = id;
+        this.listId = id;
     }
 
     public String getNameOfList() {
         return nameOfList;
     }
 
-    public void setNameOfDBFolder(String nameOfFolder) {
-        this.nameOfList = nameOfFolder;
+    public void setNameOfDBFolder(String nameOfList) {
+        this.nameOfList = nameOfList;
     }
 }
