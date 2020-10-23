@@ -3,25 +3,26 @@ package com.fprojects.TodoList.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.UUID;
 
 @Entity
 public class ListOfLists {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID ListId;
 
     private String nameOfList;
 
-    public Long getId() {
-        return id;
+    public UUID getListId() {
+        return ListId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setListId(UUID id) {
+        this.ListId = id;
     }
 
-    public String getNameOfDBFolder() {
+    public String getNameOfList() {
         return nameOfList;
     }
 
