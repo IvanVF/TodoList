@@ -25,7 +25,7 @@ public class ListOfListsController {
     public @ResponseBody
     String addNewFolder(@PathParam("listName") @PathVariable String listName) {
         ListOfLists newList = new ListOfLists();
-        newList.setNameOfDBFolder(listName);
+        newList.setNameOfList(listName);
         listOfListsRepository.save(newList);
         return listName + " Saved";
     }

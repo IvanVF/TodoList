@@ -26,7 +26,7 @@ public class ListOfLists {
         return nameOfList;
     }
 
-    public void setNameOfDBFolder(String nameOfList) {
+    public void setNameOfList(String nameOfList) {
         this.nameOfList = nameOfList;
     }
 }
