@@ -1,14 +1,15 @@
 package com.fprojects.TodoList.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class ListOfLists {
 
     @Id
+    @Column(name = "list_of_lists_id")
     @GeneratedValue
     private UUID listId;
 
@@ -29,4 +30,16 @@ public class ListOfLists {
     public void setNameOfList(String nameOfList) {
         this.nameOfList = nameOfList;
     }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "listOfLists")
+    private List<ListOfActions> listOfAction = new ArrayList<>();
+
+    public List<ListOfActions> getListOfAction() {
+        return listOfAction;
+    }
+
+    public void setListOfAction(List<ListOfActions> listOfAction) {
+        this.listOfAction = listOfAction;
+    }
+
 }
