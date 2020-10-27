@@ -8,10 +8,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Java-doc и у методов тоже
+ */
 @Component
 public class ListConverter {
 
-    public ListDto modelToDto(ListOfLists listOfLists) {
+    public ListDto modelToDto(ListOfLists listOfLists) { // TODO: fjxtve тут и далее listOfLists у нас же просто список
         ModelMapper mapper = new ModelMapper();
         ListDto map = mapper.map(listOfLists, ListDto.class);
         return map;

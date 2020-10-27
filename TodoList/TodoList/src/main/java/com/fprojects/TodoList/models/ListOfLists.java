@@ -5,16 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-public class ListOfLists {
+/**
+ * Java-doc и у полей тоже
+ */@Entity
+public class ListOfLists { // TODO: почему множественное число и список списов? у нас же просто псико дел
 
     @Id
-    @Column(name = "list_of_lists_id")
+    @Column(name = "list_of_lists_id") // TODO: список списков???
     @GeneratedValue
-    private UUID listId;
+    private UUID listId; // TODO: и так понятно что это id для списка
 
-    private String nameOfList;
+    // TODO: указать в какой колонке лежит
+    private String nameOfList; // TODO: и так понятно что это name для списка
 
+
+    // TODO: не хватает полей по заданию: даты создания и обновлдения
+
+
+    // TODO: все эти геттеры / серреты можно заменить на аннотапции @Getter/@Setter
     public UUID getListId() {
         return listId;
     }

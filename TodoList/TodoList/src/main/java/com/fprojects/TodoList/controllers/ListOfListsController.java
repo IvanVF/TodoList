@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/list")
 public class ListOfListsController {
 
+    // TODO: действия с репозитроями вынести в сервис через интерфейс, чтоб мы имели возможность подменить реализацию
     @Autowired
     ListOfListsRepository listOfListsRepository;
     @Autowired
