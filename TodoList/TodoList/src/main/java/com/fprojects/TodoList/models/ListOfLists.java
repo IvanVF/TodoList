@@ -32,13 +32,13 @@ public class ListOfLists {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "listOfLists")
-    private List<ListOfActions> listOfAction = new ArrayList<>();
+    private List<Actions> listOfAction = new ArrayList<>();
 
-    public List<ListOfActions> getListOfAction() {
+    public List<Actions> getListOfAction() {
         return listOfAction;
     }
 
-    public void setListOfAction(List<ListOfActions> listOfAction) {
+    public void setListOfAction(List<Actions> listOfAction) {
         this.listOfAction = listOfAction;
     }
 

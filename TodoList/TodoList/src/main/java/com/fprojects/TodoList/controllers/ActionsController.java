@@ -2,7 +2,7 @@ package com.fprojects.TodoList.controllers;
 
 
 
-import com.fprojects.TodoList.models.ListOfActions;
+import com.fprojects.TodoList.models.Actions;
 import com.fprojects.TodoList.repodatabase.ActionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,24 +24,24 @@ public class ActionsController {
 
 
     @PostMapping("/postNewAction") //Добавить новый связанный список дел по запросу http://localhost:8082/action/postNewAction
-    public ListOfActions addNewAction(@RequestBody ListOfActions actionName) {
+    public Actions addNewAction(@RequestBody Actions actionName) {
         return actionsRepository.save(actionName);
     }
 
     @GetMapping(path = "/getAll") //Получить список списков по запросу http://localhost:8082/action/getAll
     public @ResponseBody
-    Iterable<ListOfActions> getAllFolders() {
+    Iterable<Actions> getAllFolders() {
         return actionsRepository.findAll();
     }
 
     @GetMapping("/getOne/{id}") //Получить один список по номеру id http://localhost:8082/action/getOne/2
-    public ListOfActions getOneList(@PathVariable("id") ListOfActions listOfActions) {
-        return listOfActions;
+    public Actions getOneList(@PathVariable("id") Actions actions) {
+        return actions;
     }
 
     @DeleteMapping("/delete/{id}") //Удалить список по номеру id http://localhost:8082/action/delete/2
-    public void delete(@PathVariable("id") ListOfActions listOfActions) {
-        actionsRepository.delete(listOfActions);
+    public void delete(@PathVariable("id") Actions actions) {
+        actionsRepository.delete(actions);
     }
 
 }

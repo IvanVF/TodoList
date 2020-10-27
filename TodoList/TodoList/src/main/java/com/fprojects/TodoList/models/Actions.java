@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-public class ListOfActions {
+public class Actions {
 
     @Id
     @GeneratedValue

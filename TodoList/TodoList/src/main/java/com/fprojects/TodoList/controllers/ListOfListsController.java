@@ -1,18 +1,38 @@
 package com.fprojects.TodoList.controllers;
 
+import com.fprojects.TodoList.converter.ListConverter;
+import com.fprojects.TodoList.dto.ListDto;
 import com.fprojects.TodoList.models.ListOfLists;
 import com.fprojects.TodoList.repodatabase.ListOfListsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
+import java.util.List;
 
 @RestController
 @RequestMapping("/list")
 public class ListOfListsController {
 
+    @Autowired
+    ListOfListsRepository listOfListsRepository;
+    @Autowired
+    ListConverter converter;
 
-    @GetMapping("/ping") //Проверка связи: по запросу http://localhost:8082/list/ping должен возвращаться pong
+    @GetMapping("/getAll")
+    public List<ListDto> getAllLists() {
+        List<ListOfLists> getAllLists = listOfListsRepository.findAll();
+        return converter.modelToDto(getAllLists);
+    }
+
+    @PostMapping("/postNewList")
+    public ListDto save(@RequestBody ListDto dto) {
+        ListOfLists listOfLists = converter.dtoToModel(dto);
+        listOfLists = listOfListsRepository.save(listOfLists);
+        return converter.modelToDto(listOfLists);
+    }
+
+
+    /*@GetMapping("/ping") //Проверка связи: по запросу http://localhost:8082/list/ping должен возвращаться pong
     public String ping() {
         return "pong";
     }
@@ -44,6 +64,6 @@ public class ListOfListsController {
     @DeleteMapping("/delete/{id}") //Удалить список по номеру id http://localhost:8082/list/delete/2
     public void delete(@PathVariable("id") ListOfLists listOfLists) {
         listOfListsRepository.delete(listOfLists);
-    }
+    }*/
 
 }

@@ -1,11 +1,11 @@
 package com.fprojects.TodoList.repodatabase;
 
-import com.fprojects.TodoList.models.ListOfActions;
+import com.fprojects.TodoList.models.Actions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface ActionsRepository extends JpaRepository<ListOfActions, UUID> {
+public interface ActionsRepository extends JpaRepository<Actions, UUID> {
 }
