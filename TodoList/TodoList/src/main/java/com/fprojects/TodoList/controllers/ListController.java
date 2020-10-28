@@ -4,6 +4,7 @@ import com.fprojects.TodoList.converter.ListConverter;
 import com.fprojects.TodoList.dto.ListDto;
 import com.fprojects.TodoList.models.ListOfLists;
 import com.fprojects.TodoList.repodatabase.ListRepository;
+import com.fprojects.TodoList.services.ListServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +15,17 @@ import java.util.UUID;
 @RequestMapping("/list")
 public class ListController {
 
+    private final ListServiceInterface listServiceInterface;
+
     // TODO: действия с репозитроями вынести в сервис через интерфейс, чтоб мы имели возможность подменить реализацию
     @Autowired
     ListRepository listRepository;
     @Autowired
     ListConverter converter;
+
+    public ListController(ListServiceInterface listServiceInterface) {
+        this.listServiceInterface = listServiceInterface;
+    }
 
     @GetMapping("/getAll") // Получить список списков по запросу http://localhost:8082/list/getAll
     public List<ListDto> getAllLists() {
@@ -37,6 +44,11 @@ public class ListController {
     public ListDto findById(@PathVariable(value = "id") UUID id) {
         ListOfLists orElse = listRepository.findById(id).orElse(null);
         return converter.modelToDto(orElse);
+    }
+
+    @DeleteMapping("/delete/{id}") // Удалить list по id http://localhost:8082/list/delete/7bc44265-630a-44ce-af01-018cd6260377
+    public void deleteList(@PathVariable("id") UUID listId) {
+        listServiceInterface.deleteList(listId);
     }
 
 
