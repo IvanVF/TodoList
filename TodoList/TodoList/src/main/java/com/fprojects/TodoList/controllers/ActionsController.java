@@ -7,6 +7,9 @@ import com.fprojects.TodoList.repodatabase.ActionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Java-doc и у метолдов тоже
+ */
 @RestController
 @RequestMapping("/action")
 public class ActionsController {
@@ -16,6 +19,7 @@ public class ActionsController {
         return "pong";
     }
 
+    // TODO: действия с репозитроями вынести в сервис через интерфейс, чтоб мы имели возможность подменить реализацию
     private final ActionsRepository actionsRepository;
     @Autowired
     public ActionsController(ActionsRepository actionsRepository) {

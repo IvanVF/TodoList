@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+/**
+ * Java-doc
+ */
 @Repository
 public interface ActionsRepository extends JpaRepository<Actions, UUID> {
 }
