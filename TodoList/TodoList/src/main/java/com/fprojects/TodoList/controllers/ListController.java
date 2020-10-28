@@ -27,11 +27,19 @@ public class ListController {
         this.listServiceInterface = listServiceInterface;
     }
 
-    @GetMapping("/getAll") // Получить список списков по запросу http://localhost:8082/list/getAll
+    @DeleteMapping("/delete/{id}") // Удалить list по id http://localhost:8082/list/delete/7bc44265-630a-44ce-af01-018cd6260377
+    public void deleteList(@PathVariable("id") UUID listId) {
+        listServiceInterface.deleteList(listId);
+    }
+
+    @GetMapping("/getAll")
+    public ListDto getLists() { return listServiceInterface.getLists(); }
+
+    /*@GetMapping("/getAll") // Получить список списков по запросу http://localhost:8082/list/getAll
     public List<ListDto> getAllLists() {
         List<ListOfLists> getAllLists = listRepository.findAll();
         return converter.modelToDto(getAllLists);
-    }
+    }*/
 
     @PostMapping("/postNewList") //Добавить новый список дел по запросу http://localhost:8082/list/postNewList , body: { "nameOfList": "DTO1" }
     public ListDto save(@RequestBody ListDto dto) {
@@ -46,10 +54,7 @@ public class ListController {
         return converter.modelToDto(orElse);
     }
 
-    @DeleteMapping("/delete/{id}") // Удалить list по id http://localhost:8082/list/delete/7bc44265-630a-44ce-af01-018cd6260377
-    public void deleteList(@PathVariable("id") UUID listId) {
-        listServiceInterface.deleteList(listId);
-    }
+
 
 
     /*@GetMapping("/ping") //Проверка связи: по запросу http://localhost:8082/list/ping должен возвращаться pong

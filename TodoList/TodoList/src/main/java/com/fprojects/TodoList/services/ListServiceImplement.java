@@ -1,5 +1,6 @@
 package com.fprojects.TodoList.services;
 
+import com.fprojects.TodoList.dto.ListDto;
 import com.fprojects.TodoList.repodatabase.ListRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,12 @@ public class ListServiceImplement implements ListServiceInterface {
 
     public ListServiceImplement(ListRepository listRepository) {
         this.listRepository = listRepository;
+    }
+
+    @Override
+    public ListDto getLists() {
+        ListDto listDto = new ListDto();
+        return listDto;
     }
 
     @Override
