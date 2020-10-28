@@ -12,5 +12,5 @@ import java.util.UUID;
 /**
  * Репозиторий списка дел
  */
-public interface ListOfListsRepository extends JpaRepository<ListOfLists, UUID> {
+public interface ListRepository extends JpaRepository<ListOfLists, UUID> {
 }

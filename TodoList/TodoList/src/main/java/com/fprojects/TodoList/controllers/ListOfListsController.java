@@ -3,7 +3,7 @@ package com.fprojects.TodoList.controllers;
 import com.fprojects.TodoList.converter.ListConverter;
 import com.fprojects.TodoList.dto.ListDto;
 import com.fprojects.TodoList.models.ListOfLists;
-import com.fprojects.TodoList.repodatabase.ListOfListsRepository;
+import com.fprojects.TodoList.repodatabase.ListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,26 +16,26 @@ public class ListOfListsController {
 
     // TODO: действия с репозитроями вынести в сервис через интерфейс, чтоб мы имели возможность подменить реализацию
     @Autowired
-    ListOfListsRepository listOfListsRepository;
+    ListRepository listRepository;
     @Autowired
     ListConverter converter;
 
     @GetMapping("/getAll") // Получить список списков по запросу http://localhost:8082/list/getAll
     public List<ListDto> getAllLists() {
-        List<ListOfLists> getAllLists = listOfListsRepository.findAll();
+        List<ListOfLists> getAllLists = listRepository.findAll();
         return converter.modelToDto(getAllLists);
     }
 
     @PostMapping("/postNewList") //Добавить новый список дел по запросу http://localhost:8082/list/postNewList , body: { "nameOfList": "DTO1" }
     public ListDto save(@RequestBody ListDto dto) {
         ListOfLists listOfLists = converter.dtoToModel(dto);
-        listOfLists = listOfListsRepository.save(listOfLists);
+        listOfLists = listRepository.save(listOfLists);
         return converter.modelToDto(listOfLists);
     }
 
     @GetMapping("/getOne/{id}") // Получить 1 список по Id http://localhost:8082/list/getOne/44a7fd82-6583-401d-8bff-049ea4de2c95
     public ListDto findById(@PathVariable(value = "id") UUID id) {
-        ListOfLists orElse = listOfListsRepository.findById(id).orElse(null);
+        ListOfLists orElse = listRepository.findById(id).orElse(null);
         return converter.modelToDto(orElse);
     }
 
