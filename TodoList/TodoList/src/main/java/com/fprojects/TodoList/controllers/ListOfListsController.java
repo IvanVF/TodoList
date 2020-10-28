@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/list")
@@ -19,17 +20,23 @@ public class ListOfListsController {
     @Autowired
     ListConverter converter;
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAll") // Получить список списков по запросу http://localhost:8082/list/getAll
     public List<ListDto> getAllLists() {
         List<ListOfLists> getAllLists = listOfListsRepository.findAll();
         return converter.modelToDto(getAllLists);
     }
 
-    @PostMapping("/postNewList")
+    @PostMapping("/postNewList") //Добавить новый список дел по запросу http://localhost:8082/list/postNewList , body: { "nameOfList": "DTO1" }
     public ListDto save(@RequestBody ListDto dto) {
         ListOfLists listOfLists = converter.dtoToModel(dto);
         listOfLists = listOfListsRepository.save(listOfLists);
         return converter.modelToDto(listOfLists);
+    }
+
+    @GetMapping("/getOne/{id}") // Получить 1 список по Id http://localhost:8082/list/getOne/44a7fd82-6583-401d-8bff-049ea4de2c95
+    public ListDto findById(@PathVariable(value = "id") UUID id) {
+        ListOfLists orElse = listOfListsRepository.findById(id).orElse(null);
+        return converter.modelToDto(orElse);
     }
 
 

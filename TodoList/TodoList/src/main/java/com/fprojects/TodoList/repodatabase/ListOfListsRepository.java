@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 /**
- * Java-doc
+ * Репозиторий списка дел
  */
 public interface ListOfListsRepository extends JpaRepository<ListOfLists, UUID> {
 }
