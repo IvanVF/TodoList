@@ -26,6 +26,13 @@ public class ListServiceImplement implements ListServiceInterface {
     }
 
     @Override
+    public ListDto postList(ListDto listDto) {
+        ListOfLists list = converter.dtoToModel(listDto);
+        list = listRepository.save(list);
+        return converter.modelToDto(list);
+    }
+
+    @Override
     public List<ListDto> getLists() {
         List<ListOfLists> list = listRepository.findAll();
         List<ListDto> listDto = list.stream().map(it -> converter.modelToDto(it)).collect(Collectors.toList());

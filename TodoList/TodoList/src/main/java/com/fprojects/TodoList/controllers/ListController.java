@@ -35,6 +35,11 @@ public class ListController {
     @GetMapping("/getAll")
     public List<ListDto> getLists() { return listServiceInterface.getLists(); }
 
+    @PostMapping("/postNewList") //Добавить новый список дел по запросу http://localhost:8082/list/postNewList , body: { "nameOfList": "DTO1" }
+    public ListDto postList(@RequestBody ListDto dto) {
+        return listServiceInterface.postList(dto);
+    }
+
     /*@GetMapping("/getAll")
     public ListDto getLists() { return listServiceInterface.getLists(); }/*
 
@@ -44,12 +49,12 @@ public class ListController {
         return converter.modelToDto(getAllLists);
     }*/
 
-    @PostMapping("/postNewList") //Добавить новый список дел по запросу http://localhost:8082/list/postNewList , body: { "nameOfList": "DTO1" }
+    /*@PostMapping("/postNewList") //Добавить новый список дел по запросу http://localhost:8082/list/postNewList , body: { "nameOfList": "DTO1" }
     public ListDto save(@RequestBody ListDto dto) {
         ListOfLists listOfLists = converter.dtoToModel(dto);
         listOfLists = listRepository.save(listOfLists);
         return converter.modelToDto(listOfLists);
-    }
+    }*/
 
     @GetMapping("/getOne/{id}") // Получить 1 список по Id http://localhost:8082/list/getOne/44a7fd82-6583-401d-8bff-049ea4de2c95
     public ListDto findById(@PathVariable(value = "id") UUID id) {

@@ -13,5 +13,6 @@ public interface ListServiceInterface {
 
     void deleteList(UUID listId);
     List<ListDto> getLists();
+    ListDto postList(ListDto listDto);
 
 }
