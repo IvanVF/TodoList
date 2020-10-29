@@ -2,6 +2,7 @@ package com.fprojects.TodoList.services;
 
 import com.fprojects.TodoList.dto.ListDto;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,6 +12,6 @@ import java.util.UUID;
 public interface ListServiceInterface {
 
     void deleteList(UUID listId);
-    ListDto getLists();
+    List<ListDto> getLists();
 
 }

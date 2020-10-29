@@ -33,7 +33,10 @@ public class ListController {
     }
 
     @GetMapping("/getAll")
-    public ListDto getLists() { return listServiceInterface.getLists(); }
+    public List<ListDto> getLists() { return listServiceInterface.getLists(); }
+
+    /*@GetMapping("/getAll")
+    public ListDto getLists() { return listServiceInterface.getLists(); }/*
 
     /*@GetMapping("/getAll") // Получить список списков по запросу http://localhost:8082/list/getAll
     public List<ListDto> getAllLists() {
