@@ -8,11 +8,10 @@ import java.util.UUID;
 /**
  * Интерфейс сервиса спискрв
  */
-
 public interface ListServiceInterface {
 
     void deleteList(UUID listId);
     List<ListDto> getLists();
+    ListDto getOneList(UUID id);
     ListDto postList(ListDto listDto);
-
 }
