@@ -1,11 +1,17 @@
 package com.fprojects.TodoList.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * Java-doc и у полей тоже
+ * Описание таблицы дел
  */
+@Getter
+@Setter
 @Entity
 // TODO: желетельно принудительно указать в какой таблице лежит сущность @Table
 public class Actions { // TODO: единственное число
@@ -16,10 +22,16 @@ public class Actions { // TODO: единственное число
     private UUID actionId; // TODO: проще просто id, т.к. что это id для  Actions и атк понятно
 
     private String nameOfAction; // TODO: тоже просто name
+    private LocalDateTime creationDate;
+    private LocalDateTime changingDate;
+    private String description;
+    private Byte priority; // 1 - 5
+    private boolean completeLabel;
+
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "list_of_lists_id")
+    @JoinColumn(name = "list_id")
     private ListOfLists listOfLists; // TODO: почему список списков. у нас же просто список дел, а начи list
 
     // TODO: не хватет полей по заланию:
@@ -29,28 +41,4 @@ public class Actions { // TODO: единственное число
     //  * Приоритет, который сделать перечислением
     //  * описание
 
-    // TODO: все эти геттеры / серреты можно заменить на аннотапции @Getter/@Setter
-    public ListOfLists getListOfLists() {
-        return listOfLists;
-    }
-
-    public void setListOfLists(ListOfLists listOfLists) {
-        this.listOfLists = listOfLists;
-    }
-
-    public UUID getActionId() {
-        return actionId;
-    }
-
-    public void setActionId(UUID actionId) {
-        this.actionId = actionId;
-    }
-
-    public String getNameOfAction() {
-        return nameOfAction;
-    }
-
-    public void setNameOfAction(String nameOfAction) {
-        this.nameOfAction = nameOfAction;
-    }
 }

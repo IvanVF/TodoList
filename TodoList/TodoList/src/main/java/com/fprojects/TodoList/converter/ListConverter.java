@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Java-doc и у методов тоже
+ * Конвертер списков из entity в DTO и обратно
  */
 @Component
 public class ListConverter {
