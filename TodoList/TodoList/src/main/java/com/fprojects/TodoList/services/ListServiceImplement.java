@@ -5,6 +5,7 @@ import com.fprojects.TodoList.dto.ListDto;
 import com.fprojects.TodoList.models.ListOfLists;
 import com.fprojects.TodoList.repodatabase.ListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,8 +32,10 @@ public class ListServiceImplement implements ListServiceInterface {
     public void deleteList(UUID listId) { listRepository.deleteById(listId); } // Реализация метода удалить список
 
     @Override
-    public List<ListDto> getLists() { // Реализация метода получить список списков
-        List<ListOfLists> list = listRepository.findAll();
+    public List<ListDto> getLists(String nameSorting) { // Реализация метода получить список списков
+        List<ListOfLists> list;
+        if (nameSorting.equals("ascending")) { list = listRepository.findAll(Sort.by("nameOfList").ascending()); }
+        else { list = listRepository.findAll(); }
         List<ListDto> listDto = list.stream().map(it -> converter.modelToDto(it)).collect(Collectors.toList());
         return listDto;
     }

@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface ListServiceInterface {
 
     void deleteList(UUID listId);
-    List<ListDto> getLists();
+    List<ListDto> getLists(String nameSorting);
     ListDto getOneList(UUID id);
     ListDto postList(ListDto listDto);
 }

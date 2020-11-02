@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface ActionService {
 
     void deleteAction(UUID actionId);
-    List<ActionsDto> getActions();
+    List<ActionsDto> getActions(String nameSorting, String creationDateSorting, String changingDateSorting);
     ActionsDto getOneAction(UUID id);
     ActionsDto postAction(ActionsDto actionDto);
     ActionsDto changeAction(UUID id, ActionsDto actionsDto);

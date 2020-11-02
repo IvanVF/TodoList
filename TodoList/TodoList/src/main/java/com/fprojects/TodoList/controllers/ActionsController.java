@@ -29,7 +29,11 @@ public class ActionsController {
     public void deleteAction(@PathVariable("id") UUID id) { actionService.deleteAction(id); }
 
     @GetMapping("/getAll") //Получить список дел по запросу http://localhost:8082/action/getAll
-    public List<ActionsDto> getActions() { return actionService.getActions(); }
+    public List<ActionsDto> getActions(
+            @RequestParam(defaultValue = "no") String nameSorting,
+            @RequestParam(defaultValue = "no") String creationDateSorting,
+            @RequestParam(defaultValue = "no") String changingDateSorting
+    ) { return actionService.getActions(nameSorting, creationDateSorting, changingDateSorting); }
 
     @GetMapping("/getOne/{id}") //Получить один список по номеру id http://localhost:8082/action/getOne/2
     public ActionsDto getOneAction(@PathVariable(value = "id") UUID id) {return actionService.getOneAction(id); }
