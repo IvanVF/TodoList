@@ -5,6 +5,9 @@ import com.fprojects.TodoList.dto.ActionsDto;
 import com.fprojects.TodoList.models.Actions;
 import com.fprojects.TodoList.repodatabase.ActionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -31,21 +34,33 @@ public class ActionServiceImpl implements ActionService {
     public void deleteAction(UUID id) { actionsRepository.deleteById(id); }
 
     @Override
+    public Page<ActionsDto> getActions(String nameSorting, String creationDateSorting, String changingDateSorting, Pageable pageable) {
+        List<Actions> actions;
+        if (nameSorting.equals("ascending")) { actions = actionsRepository.findAll(Sort.by("nameOfAction").ascending()); }
+        else if (nameSorting.equals("descending")) { actions = actionsRepository.findAll(Sort.by("nameOfAction").descending()); }
+        else if (creationDateSorting.equals("ascending")) { actions = actionsRepository.findAll(Sort.by("creationDate").ascending()); }
+        else if (creationDateSorting.equals("descending")) { actions = actionsRepository.findAll(Sort.by("creationDate").descending()); }
+        else if (changingDateSorting.equals("ascending")) { actions = actionsRepository.findAll(Sort.by("changingDate").ascending()); }
+        else if (changingDateSorting.equals("descending")) { actions = actionsRepository.findAll(Sort.by("changingDate").descending()); }
+        else { actions = actionsRepository.findAll(); }
+        List<ActionsDto> actionsDtoList = actions.stream().map(it -> converter.modelToDto(it)).collect(Collectors.toList());
+        Page actionPage = new PageImpl(actionsDtoList);
+        return actionPage;
+    }
+
+    /*@Override
     public List<ActionsDto> getActions(String nameSorting, String creationDateSorting, String changingDateSorting) {
         List<Actions> actions;
         if (nameSorting.equals("ascending")) { actions = actionsRepository.findAll(Sort.by("nameOfAction").ascending()); }
-        else if (nameSorting.equals("descending")) {
-            actions = actionsRepository.findAll(Sort.by("nameOfAction").descending()); }
+        else if (nameSorting.equals("descending")) { actions = actionsRepository.findAll(Sort.by("nameOfAction").descending()); }
         else if (creationDateSorting.equals("ascending")) { actions = actionsRepository.findAll(Sort.by("creationDate").ascending()); }
-        else if (creationDateSorting.equals("descending")) {
-            actions = actionsRepository.findAll(Sort.by("creationDate").descending()); }
+        else if (creationDateSorting.equals("descending")) { actions = actionsRepository.findAll(Sort.by("creationDate").descending()); }
         else if (changingDateSorting.equals("ascending")) { actions = actionsRepository.findAll(Sort.by("changingDate").ascending()); }
         else if (changingDateSorting.equals("descending")) { actions = actionsRepository.findAll(Sort.by("changingDate").descending()); }
-            else {
-                actions = actionsRepository.findAll(); }
+            else { actions = actionsRepository.findAll(); }
         List<ActionsDto> actionsDtoList = actions.stream().map(it -> converter.modelToDto(it)).collect(Collectors.toList());
         return actionsDtoList;
-    }
+    }*/
 
     @Override
     public ActionsDto getOneAction(UUID id) {

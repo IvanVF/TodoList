@@ -7,8 +7,13 @@ import com.fprojects.TodoList.models.Actions;
 import com.fprojects.TodoList.repodatabase.ActionsRepository;
 import com.fprojects.TodoList.services.ActionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,11 +34,20 @@ public class ActionsController {
     public void deleteAction(@PathVariable("id") UUID id) { actionService.deleteAction(id); }
 
     @GetMapping("/getAll") //Получить список дел по запросу http://localhost:8082/action/getAll
+
+    public Page<ActionsDto> getActions(
+            @RequestParam(defaultValue = "no") String nameSorting,
+            @RequestParam(defaultValue = "no") String creationDateSorting,
+            @RequestParam(defaultValue = "no") String changingDateSorting,
+            @PageableDefault(size = 1) Pageable pageable
+    ) { return actionService.getActions(nameSorting, creationDateSorting, changingDateSorting, pageable); }
+
+    /*@GetMapping("/getAll") //Получить список дел по запросу http://localhost:8082/action/getAll
     public List<ActionsDto> getActions(
             @RequestParam(defaultValue = "no") String nameSorting,
             @RequestParam(defaultValue = "no") String creationDateSorting,
             @RequestParam(defaultValue = "no") String changingDateSorting
-    ) { return actionService.getActions(nameSorting, creationDateSorting, changingDateSorting); }
+    ) { return actionService.getActions(nameSorting, creationDateSorting, changingDateSorting); }*/
 
     @GetMapping("/getOne/{id}") //Получить один список по номеру id http://localhost:8082/action/getOne/2
     public ActionsDto getOneAction(@PathVariable(value = "id") UUID id) {return actionService.getOneAction(id); }
